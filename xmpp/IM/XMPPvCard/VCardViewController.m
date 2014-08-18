@@ -8,7 +8,7 @@
 #import "XMPPvCardTemp.h"
 #import "LoginUser.h"
 
-@interface VCardViewController ()
+@interface VCardViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *headImageView;
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 
@@ -66,7 +66,43 @@
     _phoneNumber.text=myvCard.note;
     
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.tag==100) {
+       UIActionSheet *sheet= [[UIActionSheet alloc]initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"自拍" otherButtonTitles:@"手机相册", nil];
+        [sheet showInView:self.view];
+        
+    }
+    
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==2) {
+        return;
+    }
+    UIImagePickerController *pickVC=[[UIImagePickerController alloc]init];
+    
+    if (buttonIndex==0) {
+        pickVC.sourceType=UIImagePickerControllerSourceTypeCamera;
+        
+    }else{
+        pickVC.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+        
+    }
+    //允许编辑;
+    pickVC.allowsEditing=YES;
+    pickVC.delegate=self;
+    //显示照片控制器;
+    [self presentViewController:pickVC animated:YES completion:nil];
+    
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo NS_DEPRECATED_IOS(2_0, 3_0);
+{
+    NSLog(@"image == %@",image);
+    _headImageView.image=image;
+    
+}
 #pragma mark - 注销用户登录
 - (IBAction)logout:(id)sender
 {
