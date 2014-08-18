@@ -10,6 +10,18 @@
 
 @interface VCardViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *headImageView;
+@property (strong, nonatomic) IBOutlet UILabel *userName;
+
+@property (strong, nonatomic) IBOutlet UILabel *jiDText;
+
+//公司名字;
+@property (strong, nonatomic) IBOutlet UILabel *company;
+//部门
+@property (strong, nonatomic) IBOutlet UILabel *department;
+//职务;
+@property (strong, nonatomic) IBOutlet UILabel *job;
+//电话;
+@property (strong, nonatomic) IBOutlet UILabel *phoneNumber;
 
 
 @end
@@ -40,10 +52,18 @@
     [[[AppDelegate sharedAppdelegate]xmppVcardModule]updateMyvCardTemp:myvCard];
     NSData *photo=[[AppDelegate sharedAppdelegate].xmppvCardAvatarModule photoDataForJID:myvCard.jid];
     if (photo) {
-        
+        _headImageView.image=[UIImage imageWithData:photo];
     }
     
-   
+    //用户名字;
+    _userName.text=myvCard.nickname;
+    _jiDText.text=[myvCard.jid full];
+    _company.text=myvCard.orgName;
+    if (myvCard.orgUnits) {
+        _department.text=myvCard.orgUnits[0];
+    }
+    _job.text=myvCard.title;
+    _phoneNumber.text=myvCard.note;
     
 }
 

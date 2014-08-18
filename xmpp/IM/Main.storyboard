@@ -284,12 +284,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="company" destination="n1V-9R-5NP" id="H5E-L4-ldY"/>
+                        <outlet property="department" destination="WMo-Tb-i6s" id="azo-O4-Iis"/>
                         <outlet property="headImageView" destination="DdO-TS-qj3" id="rba-yN-bO4"/>
+                        <outlet property="jiDText" destination="4vE-FO-sb6" id="lco-A7-PiY"/>
+                        <outlet property="job" destination="wkq-MR-afK" id="Cea-mb-8H7"/>
+                        <outlet property="phoneNumber" destination="mcl-9c-Yc8" id="4lU-7H-jOB"/>
+                        <outlet property="userName" destination="63P-Jo-sdy" id="rnL-mS-Hat"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bl6-S9-AOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="1256"/>
+            <point key="canvasLocation" x="573" y="1255"/>
         </scene>
         <!--Navigation Controller - 我的名片-->
         <scene sceneID="VV9-bb-DLV">
