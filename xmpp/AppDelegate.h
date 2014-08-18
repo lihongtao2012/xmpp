@@ -24,6 +24,10 @@ typedef void(^CompletionBlock)();
  */
 @property(nonatomic,strong,readonly)XMPPvCardTempModule *xmppVcardModule;
 
+/**
+ *  全局的XMPPvCardAvatar模块，只读属性
+ */
+@property (strong, nonatomic, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 
 /**
  *  是否注册用户标示

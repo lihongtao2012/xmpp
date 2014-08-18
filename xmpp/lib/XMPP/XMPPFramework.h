@@ -51,6 +51,8 @@
 //电子名片;
 #import "XMPPvCardTempModule.h"
 #import "XMPPvCardCoreDataStorage.h"
+#import "XMPPvCardAvatarModule.h"
+
 //
 //#import "XMPPPubSub.h"
 //
@@ -66,7 +68,6 @@
 //#import "XMPPCapabilities.h"
 //#import "XMPPCapabilitiesCoreDataStorage.h"
 //
-//#import "XMPPvCardAvatarModule.h"
 //
 //#import "XMPPMessage+XEP_0184.h"
 //

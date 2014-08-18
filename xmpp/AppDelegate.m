@@ -103,6 +103,8 @@
     //2.2电子名片模块;
     _xmppvCardStorage =[XMPPvCardCoreDataStorage sharedInstance];
     _xmppVcardModule=[[XMPPvCardTempModule alloc]initWithvCardStorage:_xmppvCardStorage];
+    _xmppvCardAvatarModule=[[XMPPvCardAvatarModule alloc]initWithvCardTempModule:_xmppVcardModule];
+    
     //2.3花名册;
     XMPPRosterCoreDataStorage *rosterStorage = [[XMPPRosterCoreDataStorage alloc]init];
     _xmppRoster = [[XMPPRoster alloc]initWithRosterStorage:rosterStorage dispatchQueue:dispatch_get_main_queue()];
@@ -111,8 +113,9 @@
     // 3.2 将重新连接模块添加到XMPPStream
     [_xmppReconnect activate:_xmppStream];
     [_xmppVcardModule activate:_xmppStream];
+    [_xmppvCardAvatarModule activate:_xmppStream];//激活;
     [_xmppRoster activate:_xmppStream];//通过Stream激活
-    
+
     
 
     //因为所有网络请求都是基于网络的数据处理,跟界面没有关系,因此可以代理方法在其他的域中执行;从而提高程序性能;
@@ -131,7 +134,9 @@
     // 2. 取消激活在setupStream方法中激活的扩展模块
     [_xmppReconnect deactivate];
     [_xmppVcardModule deactivate];
+    [_xmppvCardAvatarModule deactivate];
     [_xmppRoster deactivate];
+
     
     // 3. 断开XMPPStream的连接
     [_xmppStream disconnect];

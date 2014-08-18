@@ -9,6 +9,8 @@
 #import "LoginUser.h"
 
 @interface VCardViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *headImageView;
+
 
 @end
 
@@ -35,6 +37,11 @@
         myvCard.jid=[XMPPJID jidWithString:[LoginUser sharedLoginUser].myJIDName];
     }
     
+    [[[AppDelegate sharedAppdelegate]xmppVcardModule]updateMyvCardTemp:myvCard];
+    NSData *photo=[[AppDelegate sharedAppdelegate].xmppvCardAvatarModule photoDataForJID:myvCard.jid];
+    if (photo) {
+        
+    }
     
    
     
