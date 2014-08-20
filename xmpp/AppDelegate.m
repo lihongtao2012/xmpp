@@ -17,12 +17,14 @@
 #import "AppDelegate.h"
 
 //提示,此处不遵守XMppStreamDelegate协议,程序仍然可以正常运行,但是遵守了协议,可以方便编写代码;
-@interface AppDelegate ()<XMPPStreamDelegate>
+@interface AppDelegate ()<XMPPStreamDelegate,XMPPRosterDelegate,UIAlertViewDelegate>
 {
     CompletionBlock            _completionBlock;  // 成功的块代码
     CompletionBlock             _failedBlock;     //失败块代码;
     XMPPReconnect               *_xmppReconnect;  // XMPP重新连接XMPPStream
     XMPPvCardCoreDataStorage * _xmppvCardStorage; //电子名片数据储存模块;
+    XMPPCapabilities          * _xmppCapabilities;//实体扩展模块;
+    XMPPCapabilitiesCoreDataStorage *_xmppCapabilitiesCoreDataStorage;//数据存储模块;
 }
 
 //设置stream
@@ -91,10 +93,19 @@
 //设置stream
 -(void)setUpStream
 {
+    
+    
     NSAssert(_xmppStream == nil, @"XMPPStream被多次实例化！");
     // 1 实例化XMppstream
     
     _xmppStream=[[XMPPStream alloc]init];
+    
+    // 允许XMPPStream在真机运行时，支持后台网络通讯！
+#if !TARGET_IPHONE_SIMULATOR
+    {
+        [_xmppStream setEnableBackgroundingOnSocket:YES];
+    }
+#endif
     
     //2 扩展模块;
     
@@ -106,8 +117,17 @@
     _xmppvCardAvatarModule=[[XMPPvCardAvatarModule alloc]initWithvCardTempModule:_xmppVcardModule];
     
     //2.3花名册;
-    XMPPRosterCoreDataStorage *rosterStorage = [[XMPPRosterCoreDataStorage alloc]init];
-    _xmppRoster = [[XMPPRoster alloc]initWithRosterStorage:rosterStorage dispatchQueue:dispatch_get_main_queue()];
+    _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc]init];
+    _xmppRoster = [[XMPPRoster alloc]initWithRosterStorage:_xmppRosterStorage];
+    //设置自动订阅好友请求;
+    [_xmppRoster  setAutoAcceptKnownPresenceSubscriptionRequests:YES];
+    //自动从服务器更新记录;列如好友跟新名片了;
+    [_xmppRoster setAutoFetchRoster:YES];
+    //2.5 实体扩张模块;
+    _xmppCapabilitiesCoreDataStorage=[[XMPPCapabilitiesCoreDataStorage alloc]init];
+    _xmppCapabilities=[[XMPPCapabilities alloc]initWithCapabilitiesStorage:_xmppCapabilitiesCoreDataStorage];
+    
+    
     
     
     // 3.2 将重新连接模块添加到XMPPStream
@@ -115,7 +135,7 @@
     [_xmppVcardModule activate:_xmppStream];
     [_xmppvCardAvatarModule activate:_xmppStream];//激活;
     [_xmppRoster activate:_xmppStream];//通过Stream激活
-
+    [_xmppCapabilities activate:_xmppStream];
     
 
     //因为所有网络请求都是基于网络的数据处理,跟界面没有关系,因此可以代理方法在其他的域中执行;从而提高程序性能;
@@ -136,6 +156,7 @@
     [_xmppVcardModule deactivate];
     [_xmppvCardAvatarModule deactivate];
     [_xmppRoster deactivate];
+    [_xmppCapabilities deactivate];
 
     
     // 3. 断开XMPPStream的连接
@@ -145,6 +166,14 @@
     // 4. 内存清理
     _xmppStream = nil;
     _xmppReconnect = nil;
+    _xmppVcardModule = nil;
+    _xmppvCardAvatarModule=nil;
+    _xmppvCardStorage=nil;
+    _xmppRoster=nil;
+    _xmppRosterStorage=nil;
+    _xmppCapabilities=nil;
+    _xmppCapabilitiesCoreDataStorage=nil;
+
 }
 
 #pragma mark 通知服务器 上线
@@ -282,18 +311,54 @@
 #pragma mark - XMPPRoster Delegate Methods -
 -(void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(DDXMLElement *)item
 {
-    NSLog(@"item  %@",item);
     NSXMLElement *xmlItem = item;
-   NSArray *arr= [item elementsForName:@"item"];
-    NSLog(@" arr %@",arr);
+    NSLog(@"item  == %@",item); //<item jid="wangwu@abc.local" subscription="none"/>    里面没有状态
     NSString *jid = [xmlItem attributeStringValueForName:@"jid"];
     NSString *subscription = [xmlItem attributeStringValueForName:@"subscription"];
-    NSLog(@"  %@, %@",jid,subscription);
+    if ([subscription isEqualToString:@"remove"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:jid message:@"将你从好友中删除" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+            alert.tag = 100;
+            [alert show];
+        });
+      
+    }
+
 }
+
 -(void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
 {
-    NSLog(@" 好友状态 --  ===  %@, %@, %@ ",presence.from.user,presence.status,presence.from.resource );
+    
+    NSLog(@"接收到用户展现数据 - %@", presence);
+    
+    // 1. 判断接收到的presence类型是否为subscribe
+    if ([presence.type isEqualToString:@"subscribe"]) {
+        // 2. 取出presence中的from的jid
+        XMPPJID *from = [presence from];
+        
+        // 3. 接受来自from添加好友的订阅请求
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:from.full message:@"请求添加好友" delegate:self cancelButtonTitle:@"拒绝" otherButtonTitles:@"同意", nil];
+            alert.tag = 101;
+            [alert show];
+            return ;
+        });
+
+    }
+
 }
+#pragma mark - XMPPRoster代理
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
+{
+    NSLog(@"接收到其他用户的请求 %@", presence);
+    
+}
+
+//- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message;
+//{
+//    NSLog(@" MESSAGE MESSAGE MESSAGE %@",message);
+//    
+//}
 - (void)logout
 {
     // 1. 通知服务器下线，并断开连接
@@ -302,5 +367,31 @@
     // 2. 显示用户登录Storyboard
     [self showStoryboardWithLogonState:NO];
 }
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"buttonIndex  %ld", buttonIndex);
+    switch (alertView.tag) {
+        case 100:
+        {
+            
+            
+        }
+            break;
+        case 101:
+        {
+            XMPPJID *jid = [XMPPJID jidWithString:alertView.title];
+            if (buttonIndex == 1) {//接受请求
+                [self.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+             }else if (buttonIndex == 0){//拒绝请求
+                [self.xmppRoster rejectPresenceSubscriptionRequestFrom:jid];
+            }
+            
+        }
+            break;
 
+            
+        default:
+            break;
+    }
+}
 @end

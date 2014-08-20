@@ -7,8 +7,13 @@
 #import "AppDelegate.h"
 #import "XMPPvCardTemp.h"
 #import "LoginUser.h"
-
-@interface VCardViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+#import "EditVCadViewController.h"
+@interface VCardViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,editVCadViewControllerDelegate>
+{
+    NSArray *_vCardTitleArray;// 存储 头像 姓名 , 等供下一个页面使用;
+    NSArray * _vCardMessageArray; // 存储 头像 姓名 内容 等供下一个页面使用;
+    
+}
 @property (strong, nonatomic) IBOutlet UIImageView *headImageView;
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 
@@ -32,6 +37,10 @@
 {
     [super viewDidLoad];
     [self setupvCard];
+    _vCardTitleArray=@[@[@"头像",@"姓名",@"JID"],@[@"公司",@"部门",@"职务",@"电话"]];
+    _vCardMessageArray=@[@[@"",_userName,_jiDText],@[_company,_department,_job,_phoneNumber]];
+    
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -68,14 +77,53 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
+    
     if (cell.tag==100) {
        UIActionSheet *sheet= [[UIActionSheet alloc]initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"自拍" otherButtonTitles:@"手机相册", nil];
         [sheet showInView:self.view];
         
+    }else if (cell.tag==101)
+    {
+        [self performSegueWithIdentifier:@"editVCard" sender:indexPath];
     }
     
 }
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"sender  %@",sender);
+    NSIndexPath *indexPath=sender;
+    EditVCadViewController *editVcardControll= segue.destinationViewController;
+    editVcardControll.titleString=_vCardTitleArray[indexPath.section][indexPath.row];
+    editVcardControll.label=_vCardMessageArray[indexPath.section][indexPath.row];
+    editVcardControll.delegate=self;
+}
+#pragma  mark - EditVCadViewController代理;
+-(void)editVCadViewControllerDidFinsh
+{
+    [self savevCard];
+    
+}
+
+#pragma mark - 更新电子名片
+// 注释：此处代码有点偷懒，不管字段是否更改，都一次性保存所有字段内容
+- (void)savevCard
+{
+    // 1. 获取电子名片
+    XMPPvCardTemp *myCard = [[[AppDelegate sharedAppdelegate] xmppVcardModule] myvCardTemp];
+    
+    // 2. 设置名片内容
+    myCard.photo = UIImagePNGRepresentation(_headImageView.image);
+    myCard.nickname = [_userName.text trimString];
+    myCard.orgName = [_company.text trimString];
+    myCard.orgUnits = @[[_department.text trimString]];
+    myCard.title = [_job.text trimString];
+    myCard.note = [_phoneNumber.text trimString];
+    // 3. 保存电子名片
+    [[[AppDelegate sharedAppdelegate] xmppVcardModule] updateMyvCardTemp:myCard];
+}
+
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex==2) {

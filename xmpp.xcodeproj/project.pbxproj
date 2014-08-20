@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		071E81F419A2E8FA001C2ABB /* EditVCadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071E81F319A2E8FA001C2ABB /* EditVCadViewController.m */; };
+		071E81F919A33745001C2ABB /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071E81F819A33745001C2ABB /* FriendTableViewController.m */; };
+		071E81FC19A3375C001C2ABB /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071E81FB19A3375C001C2ABB /* AddFriendViewController.m */; };
 		072AFB5B199B4F4900341A3A /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 072AFB59199B4F4900341A3A /* NSString+Helper.m */; };
 		07386470199E0A8900A35054 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0738646F199E0A8900A35054 /* HomeTableViewController.m */; };
-		07386473199E0ABD00A35054 /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07386472199E0ABD00A35054 /* FriendTableViewController.m */; };
 		079E591E199114530054F9A8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12421990B4B100174093 /* XCTest.framework */; };
 		079E591F199114530054F9A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12231990B4B100174093 /* Foundation.framework */; };
 		079E5920199114530054F9A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12271990B4B100174093 /* UIKit.framework */; };
+		07B78F1919A47BE00090A9DC /* ChartMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B78F1819A47BE00090A9DC /* ChartMessageViewController.m */; };
 		07BB12241990B4B100174093 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12231990B4B100174093 /* Foundation.framework */; };
 		07BB12261990B4B100174093 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12251990B4B100174093 /* CoreGraphics.framework */; };
 		07BB12281990B4B100174093 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12271990B4B100174093 /* UIKit.framework */; };
@@ -178,14 +181,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		071E81F219A2E8FA001C2ABB /* EditVCadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVCadViewController.h; sourceTree = "<group>"; };
+		071E81F319A2E8FA001C2ABB /* EditVCadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVCadViewController.m; sourceTree = "<group>"; };
+		071E81F719A33745001C2ABB /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
+		071E81F819A33745001C2ABB /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewController.m; sourceTree = "<group>"; };
+		071E81FA19A3375C001C2ABB /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
+		071E81FB19A3375C001C2ABB /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		072AFB58199B4F4900341A3A /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		072AFB59199B4F4900341A3A /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		072AFB62199B580A00341A3A /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		0738646E199E0A8900A35054 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
 		0738646F199E0A8900A35054 /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
-		07386471199E0ABD00A35054 /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
-		07386472199E0ABD00A35054 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewController.m; sourceTree = "<group>"; };
 		079E591D199114530054F9A8 /* xmpp Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xmpp Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07B78F1719A47BE00090A9DC /* ChartMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartMessageViewController.h; sourceTree = "<group>"; };
+		07B78F1819A47BE00090A9DC /* ChartMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartMessageViewController.m; sourceTree = "<group>"; };
 		07BB12201990B4B000174093 /* xmpp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xmpp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07BB12231990B4B100174093 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		07BB12251990B4B100174093 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -525,6 +534,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		071E81F619A336E0001C2ABB /* Roster */ = {
+			isa = PBXGroup;
+			children = (
+				071E81F719A33745001C2ABB /* FriendTableViewController.h */,
+				071E81F819A33745001C2ABB /* FriendTableViewController.m */,
+				071E81FA19A3375C001C2ABB /* AddFriendViewController.h */,
+				071E81FB19A3375C001C2ABB /* AddFriendViewController.m */,
+				07B78F1719A47BE00090A9DC /* ChartMessageViewController.h */,
+				07B78F1819A47BE00090A9DC /* ChartMessageViewController.m */,
+			);
+			path = Roster;
+			sourceTree = "<group>";
+		};
 		072AFB55199B4F4900341A3A /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +562,8 @@
 			children = (
 				07C55382199E00AC00A35502 /* VCardViewController.h */,
 				07C55383199E00AC00A35502 /* VCardViewController.m */,
+				071E81F219A2E8FA001C2ABB /* EditVCadViewController.h */,
+				071E81F319A2E8FA001C2ABB /* EditVCadViewController.m */,
 			);
 			path = XMPPvCard;
 			sourceTree = "<group>";
@@ -622,12 +646,11 @@
 		07C5537F199E009200A35502 /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				071E81F619A336E0001C2ABB /* Roster */,
 				07B5E32C19A204E000ACDF22 /* XMPPvCard */,
 				07C55380199E00A600A35502 /* Main.storyboard */,
 				0738646E199E0A8900A35054 /* HomeTableViewController.h */,
 				0738646F199E0A8900A35054 /* HomeTableViewController.m */,
-				07386471199E0ABD00A35054 /* FriendTableViewController.h */,
-				07386472199E0ABD00A35054 /* FriendTableViewController.m */,
 			);
 			name = IM;
 			path = ../xmpp/IM;
@@ -1615,18 +1638,19 @@
 				07FD286D19A1DD0300450E0F /* XMPPSoftwareVersion.m in Sources */,
 				07FD28A419A1DD0300450E0F /* DDXMLElement.m in Sources */,
 				07C55384199E00AC00A35502 /* VCardViewController.m in Sources */,
+				071E81F419A2E8FA001C2ABB /* EditVCadViewController.m in Sources */,
 				07FD286119A1DD0300450E0F /* XMPPvCardTempModule.m in Sources */,
 				07FD285719A1DD0300450E0F /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				07FD283019A1DD0300450E0F /* XMPPParser.m in Sources */,
 				07FD285019A1DD0300450E0F /* XMPPRoomMemoryStorage.m in Sources */,
 				07FD287D19A1DD0300450E0F /* XMPPMessage+XEP_0184.m in Sources */,
+				071E81FC19A3375C001C2ABB /* AddFriendViewController.m in Sources */,
 				07C5537E199E007800A35502 /* LoginViewController.m in Sources */,
 				07FD287B19A1DD0300450E0F /* XMPPMessage+XEP_0172.m in Sources */,
 				072AFB5B199B4F4900341A3A /* NSString+Helper.m in Sources */,
 				07FD282019A1DD0300450E0F /* XMPPAnonymousAuthentication.m in Sources */,
 				07FD286019A1DD0300450E0F /* XMPPvCardTempLabel.m in Sources */,
 				07FD288919A1DD0300450E0F /* XMPPAttentionModule.m in Sources */,
-				07386473199E0ABD00A35054 /* FriendTableViewController.m in Sources */,
 				07FD283C19A1DD0300450E0F /* XMPPUserCoreDataStorageObject.m in Sources */,
 				07FD283F19A1DD0300450E0F /* XMPPUserMemoryStorageObject.m in Sources */,
 				07FD287519A1DD0300450E0F /* XMPPMessageArchiving.xcdatamodeld in Sources */,
@@ -1713,6 +1737,7 @@
 				07FD282B19A1DD0300450E0F /* XMPPElement.m in Sources */,
 				07FD287319A1DD0300450E0F /* XMPPCapsResourceCoreDataStorageObject.m in Sources */,
 				07FD285519A1DD0300450E0F /* XMPPRoom.m in Sources */,
+				07B78F1919A47BE00090A9DC /* ChartMessageViewController.m in Sources */,
 				07FD283E19A1DD0300450E0F /* XMPPRosterMemoryStorage.m in Sources */,
 				07FD287E19A1DD0300450E0F /* XMPPMessageDeliveryReceipts.m in Sources */,
 				07FD286419A1DD0300450E0F /* XMPPResultSet.m in Sources */,
@@ -1720,6 +1745,7 @@
 				07FD289419A1DD0300450E0F /* XMPPIDTracker.m in Sources */,
 				07FD288D19A1DD0300450E0F /* NSXMLElement+XEP_0297.m in Sources */,
 				07FD284B19A1DD0300450E0F /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
+				071E81F919A33745001C2ABB /* FriendTableViewController.m in Sources */,
 				07FD285D19A1DD0300450E0F /* XMPPvCardTempAdrTypes.m in Sources */,
 				07FD283A19A1DD0300450E0F /* XMPPRoster.xcdatamodel in Sources */,
 				07FD284D19A1DD0300450E0F /* XMPPRoomHybridStorage.m in Sources */,

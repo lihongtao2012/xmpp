@@ -64,9 +64,9 @@
 //#import "XMPPMessage+XEP_0085.h"
 //
 //#import "XMPPTransports.h"
-//
-//#import "XMPPCapabilities.h"
-//#import "XMPPCapabilitiesCoreDataStorage.h"
+//实体扩张模块 增加性能;
+#import "XMPPCapabilities.h"
+#import "XMPPCapabilitiesCoreDataStorage.h"
 //
 //
 //#import "XMPPMessage+XEP_0184.h"

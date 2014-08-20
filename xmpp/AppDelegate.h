@@ -18,7 +18,14 @@ typedef void(^CompletionBlock)();
  *全局的Xmpp 只读属性;
  */
 @property(nonatomic,readonly,strong)XMPPStream *xmppStream;
+/**
+ *  花名册 只读属性;
+ */
 @property (nonatomic,strong,readonly) XMPPRoster *xmppRoster;//xmpp好友列表
+/**
+ *  全局的XMPPRosterCoreDataStorage模块，只读属性
+ */
+@property (strong, nonatomic, readonly) XMPPRosterCoreDataStorage *xmppRosterStorage;
 /**
  *  vcar模块;只读属性;
  */
@@ -28,6 +35,7 @@ typedef void(^CompletionBlock)();
  *  全局的XMPPvCardAvatar模块，只读属性
  */
 @property (strong, nonatomic, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
+
 
 /**
  *  是否注册用户标示
