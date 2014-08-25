@@ -15,7 +15,8 @@
     #import <Foundation/Foundation.h>
    #import"AppDelegate.h"
     #import"Header.h"
-   #import"NSString+Helper.h"
+    #import"NSString+Helper.h"
+    #import"Tools.h"
 #endif
 //控制log输出
 #if 1

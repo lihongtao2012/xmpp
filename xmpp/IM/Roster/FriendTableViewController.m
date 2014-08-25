@@ -6,7 +6,8 @@
 //
 
 #import "FriendTableViewController.h"
-
+#import "ChartMessageViewController.h"
+#import "LoginUser.h"
 @interface FriendTableViewController ()<NSFetchedResultsControllerDelegate,UIAlertViewDelegate>
 {
     NSFetchedResultsController *_fetchedResultController;//设置查询
@@ -108,7 +109,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
    XMPPUserCoreDataStorageObject *managedObject=  [_fetchedResultController objectAtIndexPath:indexPath];
-    cell.textLabel.text=managedObject.displayName;
+    cell.textLabel.text=managedObject.jidStr;
     cell.imageView.image=[self loadImageWith:managedObject];
     
     return cell;
@@ -219,6 +220,18 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:@"ChartMessage"]) {
+        NSIndexPath *indexPath= sender;
+        XMPPUserCoreDataStorageObject *managedObject=  [_fetchedResultController objectAtIndexPath:indexPath];
+        
+        ChartMessageViewController *chartMessageVC= segue.destinationViewController;
+        chartMessageVC.bareJidStr=managedObject.jidStr;
+        chartMessageVC.bareImage=managedObject.photo;
+        NSData *photoData=[[AppDelegate sharedAppdelegate].xmppvCardAvatarModule photoDataForJID:[XMPPJID jidWithString:[LoginUser sharedLoginUser].myJIDName]];
+        
+        chartMessageVC.myImage=[UIImage imageWithData:photoData];
+        
+    }
     
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

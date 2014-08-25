@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9BB5FC4A-9413-4D9B-9947-D7263BA5AD3A</string>
+	<string>73D9A853-2CF2-4EAB-A010-9FBD6E4EF343</string>
 	<key>IDESourceControlProjectName</key>
 	<string>xmpp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B0DC377D-2B47-4D39-A796-D87E9A78DB2A</key>
-		<string>https://github.com/lihongtao2014/--.git</string>
+		<key>7C427A4B-A378-4699-A814-28D813999A4B</key>
+		<string>https://github.com/lihongtao2014/xmpp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>xmpp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B0DC377D-2B47-4D39-A796-D87E9A78DB2A</key>
+		<key>7C427A4B-A378-4699-A814-28D813999A4B</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/lihongtao2014/--.git</string>
+	<string>https://github.com/lihongtao2014/xmpp.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B0DC377D-2B47-4D39-A796-D87E9A78DB2A</string>
+	<string>7C427A4B-A378-4699-A814-28D813999A4B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B0DC377D-2B47-4D39-A796-D87E9A78DB2A</string>
+			<string>7C427A4B-A378-4699-A814-28D813999A4B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>xmpp</string>
 		</dict>

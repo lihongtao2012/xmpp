@@ -17,4 +17,5 @@ single_interface(LoginUser)
 
 @property(nonatomic,strong,readonly)NSString *myJIDName;
 
+
 @end

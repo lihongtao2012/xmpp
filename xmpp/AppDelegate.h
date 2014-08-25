@@ -35,6 +35,14 @@ typedef void(^CompletionBlock)();
  *  全局的XMPPvCardAvatar模块，只读属性
  */
 @property (strong, nonatomic, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
+/**
+ *  XMPPMessageArchiving 好友消息;
+ */
+@property(nonatomic,strong,readonly)XMPPMessageArchiving *xmppMessageArchiving;
+/**
+ *  xmpp 消息存储;
+ */
+@property(nonatomic,strong,readonly)XMPPMessageArchivingCoreDataStorage *xmppMessageArchivingCoreDataStorage;
 
 
 /**

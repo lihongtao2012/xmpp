@@ -86,9 +86,9 @@
             [_userNameText becomeFirstResponder];
         }else{
             //登陆失败是密码错误;
-            _passWordText.text=@"";
+                _passWordText.text=@"";
             [_passWordText becomeFirstResponder];
-        }
+         }
         
     }];
     

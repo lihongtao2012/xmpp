@@ -13,8 +13,8 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 12,
-          "top" : 12,
+          "bottom" : 40,
+          "top" : 60,
           "right" : 8,
           "left" : 10
         }

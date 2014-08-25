@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface ChartMessageViewController : UIViewController
+/**
+ *  跟谁聊天的那个人 jid;
+ */
+@property(nonatomic,strong)NSString *bareJidStr;
+/**
+ * 跟谁聊天的那个人 头像;
+ */
+@property(nonatomic,strong)UIImage *bareImage;
+@property(nonatomic,strong)UIImage *myImage;
 
 @end

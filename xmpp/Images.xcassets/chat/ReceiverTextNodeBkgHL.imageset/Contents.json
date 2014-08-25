@@ -13,14 +13,14 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 40,
-          "top" : 60,
-          "right" : 10,
-          "left" : 10
+          "bottom" : 54,
+          "top" : 53,
+          "right" : 31,
+          "left" : 41
         }
       },
       "idiom" : "universal",
-      "filename" : "ios_btn3@2x.png",
+      "filename" : "ReceiverTextNodeBkgHL@2x.png",
       "scale" : "2x"
     }
   ],

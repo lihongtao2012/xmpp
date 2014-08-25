@@ -12,6 +12,8 @@
 		071E81FC19A3375C001C2ABB /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071E81FB19A3375C001C2ABB /* AddFriendViewController.m */; };
 		072AFB5B199B4F4900341A3A /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 072AFB59199B4F4900341A3A /* NSString+Helper.m */; };
 		07386470199E0A8900A35054 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0738646F199E0A8900A35054 /* HomeTableViewController.m */; };
+		077ADC1519A7160600E2F721 /* ChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 077ADC1419A7160600E2F721 /* ChatMessageCell.m */; };
+		078455BD19A9ED890098720C /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 078455BC19A9ED890098720C /* Tools.m */; };
 		079E591E199114530054F9A8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12421990B4B100174093 /* XCTest.framework */; };
 		079E591F199114530054F9A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12231990B4B100174093 /* Foundation.framework */; };
 		079E5920199114530054F9A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BB12271990B4B100174093 /* UIKit.framework */; };
@@ -189,9 +191,13 @@
 		071E81FB19A3375C001C2ABB /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		072AFB58199B4F4900341A3A /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		072AFB59199B4F4900341A3A /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
-		072AFB62199B580A00341A3A /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		0738646E199E0A8900A35054 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
 		0738646F199E0A8900A35054 /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
+		077ADC1319A7160600E2F721 /* ChatMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageCell.h; sourceTree = "<group>"; };
+		077ADC1419A7160600E2F721 /* ChatMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageCell.m; sourceTree = "<group>"; };
+		078455BB19A9ED890098720C /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		078455BC19A9ED890098720C /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		078455BE19A9EE010098720C /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		079E591D199114530054F9A8 /* xmpp Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xmpp Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B78F1719A47BE00090A9DC /* ChartMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartMessageViewController.h; sourceTree = "<group>"; };
 		07B78F1819A47BE00090A9DC /* ChartMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartMessageViewController.m; sourceTree = "<group>"; };
@@ -543,6 +549,8 @@
 				071E81FB19A3375C001C2ABB /* AddFriendViewController.m */,
 				07B78F1719A47BE00090A9DC /* ChartMessageViewController.h */,
 				07B78F1819A47BE00090A9DC /* ChartMessageViewController.m */,
+				077ADC1319A7160600E2F721 /* ChatMessageCell.h */,
+				077ADC1419A7160600E2F721 /* ChatMessageCell.m */,
 			);
 			path = Roster;
 			sourceTree = "<group>";
@@ -624,7 +632,6 @@
 				07BB122C1990B4B100174093 /* InfoPlist.strings */,
 				07BB122F1990B4B100174093 /* main.m */,
 				07FD26B819A1DBEA00450E0F /* xmpp-Prefix.pch */,
-				072AFB62199B580A00341A3A /* Header.h */,
 			);
 			name = "Supporting Files";
 			path = ../xmpp;
@@ -659,6 +666,9 @@
 		07FD24C719A1D71400450E0F /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				078455BE19A9EE010098720C /* Header.h */,
+				078455BB19A9ED890098720C /* Tools.h */,
+				078455BC19A9ED890098720C /* Tools.m */,
 				07FD24C819A1D71400450E0F /* Singleton.h */,
 			);
 			path = Tool;
@@ -1689,6 +1699,7 @@
 				07FD286819A1DD0300450E0F /* XMPPIQ+XEP_0066.m in Sources */,
 				07FD289C19A1DD0300450E0F /* DDLog.m in Sources */,
 				07FD289819A1DD0300450E0F /* GCDAsyncSocket.m in Sources */,
+				077ADC1519A7160600E2F721 /* ChatMessageCell.m in Sources */,
 				07FD287719A1DD0300450E0F /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				07FD286519A1DD0300450E0F /* XMPPIQ+XEP_0060.m in Sources */,
 				07FD283719A1DD0300450E0F /* XMPPReconnect.m in Sources */,
@@ -1770,6 +1781,7 @@
 				07FD286E19A1DD0300450E0F /* XMPPTransports.m in Sources */,
 				07FD288C19A1DD0300450E0F /* XMPPMessageCarbons.m in Sources */,
 				07FD28A219A1DD0300450E0F /* NSString+DDXML.m in Sources */,
+				078455BD19A9ED890098720C /* Tools.m in Sources */,
 				07FD283319A1DD0300450E0F /* XMPPBandwidthMonitor.m in Sources */,
 				07FD284519A1DD0300450E0F /* XMPPIQ+LastActivity.m in Sources */,
 			);
@@ -1927,6 +1939,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "xmpp/xmpp-Prefix.pch";
 				INFOPLIST_FILE = "xmpp/xmpp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/xmpp/lib/XMPP/Vendor/libidn",
@@ -1944,6 +1957,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "xmpp/xmpp-Prefix.pch";
 				INFOPLIST_FILE = "xmpp/xmpp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/xmpp/lib/XMPP/Vendor/libidn",

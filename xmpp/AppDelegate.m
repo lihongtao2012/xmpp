@@ -15,6 +15,7 @@
 
 #import "Login/LoginUser.h"
 #import "AppDelegate.h"
+#define  kIsUserLogin @"isUserLogin"
 
 //提示,此处不遵守XMppStreamDelegate协议,程序仍然可以正常运行,但是遵守了协议,可以方便编写代码;
 @interface AppDelegate ()<XMPPStreamDelegate,XMPPRosterDelegate,UIAlertViewDelegate>
@@ -55,21 +56,27 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setUpStream];
-    // Override point for customization after application launch.
+    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    BOOL  isUserLogin = [[userDefaults objectForKey:kIsUserLogin] boolValue];
+    [self showStoryboardWithLogonState:isUserLogin];
+
     return YES;
 }
+//登录
+-(void)showStoryboardWithLogonState:(BOOL)isUserLogin
 
--(void)showStoryboardWithLogonState:(BOOL)isUserLogon
-
-{
-    UIStoryboard *storyboard=nil;
-    if (isUserLogon) {
+{ UIStoryboard *storyboard=nil;
+    if (isUserLogin) {
       storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     }else{
         storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     }
    dispatch_async(dispatch_get_main_queue(), ^{
     self.window.rootViewController=storyboard.instantiateInitialViewController;
+       if (![self.window isKeyWindow]) {
+           [self.window makeKeyAndVisible];
+       }
 });
 }
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -81,8 +88,11 @@
 {
     // 应用程序被激活后，直接连接，使用系统偏好中的保存的用户记录登录
     // 从而实现自动登录的效果！
-    [self connect];
-
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    BOOL  isUserLogin = [[userDefaults objectForKey:kIsUserLogin] boolValue];
+    if (isUserLogin) {
+        [self connect];
+    }
 }
 - (void)dealloc
 {
@@ -126,24 +136,25 @@
     //2.5 实体扩张模块;
     _xmppCapabilitiesCoreDataStorage=[[XMPPCapabilitiesCoreDataStorage alloc]init];
     _xmppCapabilities=[[XMPPCapabilities alloc]initWithCapabilitiesStorage:_xmppCapabilitiesCoreDataStorage];
+    //2.6 消息模块;
+    _xmppMessageArchivingCoreDataStorage=[[XMPPMessageArchivingCoreDataStorage alloc]init];
+    _xmppMessageArchiving=[[XMPPMessageArchiving alloc]initWithMessageArchivingStorage:_xmppMessageArchivingCoreDataStorage];
     
-    
-    
-    
+
     // 3.2 将重新连接模块添加到XMPPStream
     [_xmppReconnect activate:_xmppStream];
     [_xmppVcardModule activate:_xmppStream];
     [_xmppvCardAvatarModule activate:_xmppStream];//激活;
     [_xmppRoster activate:_xmppStream];//通过Stream激活
     [_xmppCapabilities activate:_xmppStream];
+    [_xmppMessageArchiving activate:_xmppStream];
     
 
     //因为所有网络请求都是基于网络的数据处理,跟界面没有关系,因此可以代理方法在其他的域中执行;从而提高程序性能;
     
     [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     [_xmppRoster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
-
-  }
+}
 
 //销毁XMPPStream并注销已注册的扩展模块
 - (void)teardownStream
@@ -157,7 +168,7 @@
     [_xmppvCardAvatarModule deactivate];
     [_xmppRoster deactivate];
     [_xmppCapabilities deactivate];
-
+    [_xmppMessageArchiving deactivate];
     
     // 3. 断开XMPPStream的连接
     [_xmppStream disconnect];
@@ -173,6 +184,8 @@
     _xmppRosterStorage=nil;
     _xmppCapabilities=nil;
     _xmppCapabilitiesCoreDataStorage=nil;
+    _xmppMessageArchiving=nil;
+    _xmppMessageArchivingCoreDataStorage=nil;
 
 }
 
@@ -207,11 +220,6 @@
 
     NSString *myJIDName=[LoginUser sharedLoginUser].myJIDName;//@"zhangsan@abc.local";
     
-    // 如果没有主机名或用户名（通常第一次运行时会出现），直接显示登录窗口
-    if ([hostName isEmptyString] || [myJIDName isEmptyString]) {
-        [self showStoryboardWithLogonState:NO];
-        return;
-    }
     //3,设置XMPPStream 的JID 和主机;
     [_xmppStream setMyJID:[XMPPJID jidWithString:myJIDName]];
     [_xmppStream setHostName:hostName];
@@ -291,10 +299,17 @@
 -(void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
     if (_completionBlock!=nil) {
-        _completionBlock();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _completionBlock();
+        });
     }
     [self goOnline];
     NSLog(@"验证成功");
+    //储存登录状态;
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:YES forKey:kIsUserLogin];
+    [userDefaults synchronize];
+    
     // 显示主Storyboard
     [self showStoryboardWithLogonState:YES];
 
@@ -305,7 +320,9 @@
 {
     NSLog(@"密码错误")
     if (_failedBlock!=nil) {
-        _failedBlock();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _failedBlock();
+        });
     }
 }
 #pragma mark - XMPPRoster Delegate Methods -
@@ -354,17 +371,20 @@
     
 }
 
-//- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message;
-//{
-//    NSLog(@" MESSAGE MESSAGE MESSAGE %@",message);
-//    
-//}
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message;
+{
+    NSLog(@" MESSAGE MESSAGE MESSAGE %@",message);
+    
+}
 - (void)logout
 {
     // 1. 通知服务器下线，并断开连接
     [self disConnet];
     
     // 2. 显示用户登录Storyboard
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:NO forKey:kIsUserLogin];
+    [userDefaults synchronize];
     [self showStoryboardWithLogonState:NO];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -374,7 +394,7 @@
         case 100:
         {
             
-            
+    
         }
             break;
         case 101:

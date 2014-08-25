@@ -4,28 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "xmpp/AppDelegate.m"
-            timestampString = "430210302.003842"
+            timestampString = "430562890.776951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "-xmppRoster:didReceivePresenceSubscriptionRequest:"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
+            landmarkName = "-xmppStream:didNotAuthenticate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -36,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "xmpp/AppDelegate.m"
-            timestampString = "430210302.003842"
+            timestampString = "430562890.776951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
-            landmarkName = "-xmppStream:didReceivePresence:"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
+            landmarkName = "-xmppStream:didNotRegister:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,29 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "xmpp/AppDelegate.m"
-            timestampString = "430210302.003842"
+            filePath = "xmpp/Login/LoginViewController.m"
+            timestampString = "430560005.369592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
-            landmarkName = "-xmppRoster:didReceivePresenceSubscriptionRequest:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "xmpp/AppDelegate.m"
-            timestampString = "430210320.86791"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
-            landmarkName = "-xmppRoster:didReceiveRosterItem:"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-loginAndRegister:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
